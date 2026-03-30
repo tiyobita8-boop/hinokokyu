@@ -3,7 +3,7 @@
 <head>
   <title>Fire Breathing Loop</title>
 </head>
-<body id="body" style="text-align:center; font-family:sans-serif; transition:0.2s;">
+<body id="body" style="text-align:center; font-family:sans-serif; transition:0.5s;">
 
 <h1 id="mode">🔥 火の呼吸</h1>
 <h2 id="time">1:00</h2>
@@ -11,7 +11,6 @@
 
 <button onclick="resetTimer()">Reset</button>
 
-<!-- 🔥ここに説明を追加 -->
 <p style="margin-top:20px; line-height:1.8;">
 背筋を伸ばして座る。鼻のみで呼吸。<br>
 吐いて腹をへこます。吸って腹を自然にふくらます<br>
@@ -41,12 +40,20 @@ function updateDisplay(){
   document.getElementById("count").innerText = "周回：" + round;
 
   let label = "";
-  if(mode === "fire") label = "🔥 火の呼吸";
-  if(mode === "break") label = "☕ 休憩";
+  let body = document.getElementById("body");
+
+  if(mode === "fire"){
+    label = "🔥 火の呼吸";
+    body.style.backgroundColor = "red";   // 🔥赤
+  } else {
+    label = "☕ 休憩";
+    body.style.backgroundColor = "blue";  // 🔵青
+  }
 
   document.getElementById("mode").innerText = label;
 }
 
+// 🔵🟡 点滅（10秒）
 function flashScreen(){
   if(flashing) return;
   flashing = true;
@@ -60,9 +67,9 @@ function flashScreen(){
   }, 300);
 
   setTimeout(() => {
-    clearInterval(flash);
-    body.style.backgroundColor = "white";
     flashing = false;
+    clearInterval(flash);
+    updateDisplay(); // ←元の色に戻す✨
   }, 10000);
 }
 

@@ -11,9 +11,17 @@
 
 <button onclick="resetTimer()">Reset</button>
 
+<!-- 🔥ここに説明を追加 -->
+<p style="margin-top:20px; line-height:1.8;">
+背筋を伸ばして座る。鼻のみで呼吸。<br>
+吐いて腹をへこます。吸って腹を自然にふくらます<br>
+1秒に２回のスピード<br>
+体内のEを活性化。毒素排泄。血液循環活性化。丹田強化
+</p>
+
 <script>
-let FIRE = 60;   // 1分
-let BREAK = 30;  // 30秒
+let FIRE = 60;
+let BREAK = 30;
 
 let timeLeft = FIRE;
 let mode = "fire";
@@ -39,7 +47,6 @@ function updateDisplay(){
   document.getElementById("mode").innerText = label;
 }
 
-// 🔵🟡 点滅（10秒）
 function flashScreen(){
   if(flashing) return;
   flashing = true;
@@ -66,7 +73,7 @@ function nextPhase(){
   } else {
     mode = "fire";
     timeLeft = FIRE;
-    round++; // 1周カウント🔥
+    round++;
   }
   updateDisplay();
 }
@@ -93,10 +100,7 @@ function resetTimer(){
   round = 0;
   updateDisplay();
 }
-背筋を伸ばして座る。鼻のみで呼吸。<BR>
-吐いて腹をへこます。吸って腹を自然にふくらます<BR>
-1秒に２回のスピード<BR>
-体内のEを活性化。毒素排泄。血液循環活性化。丹田強化<BR>
+
 // 🔥自動スタート
 window.onload = startTimer;
 

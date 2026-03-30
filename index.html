@@ -5,21 +5,24 @@
 </head>
 <body id="body" style="text-align:center; font-family:sans-serif; transition:0.2s;">
 
-<h1 id="mode">Work</h1>
+<h1 id="mode">🔥 Work</h1>
 <h2 id="time">2:00</h2>
+<h3 id="count">周回：0</h3>
+
 <button onclick="startTimer()">Start</button>
-<button onclick="flashScreen()">テスト点滅</button>
+<button onclick="resetTimer()">Reset</button>
 
 <script>
-let WORK = 2 * 60;   // ←25分 → 2分
-let FIRE = 30;       // ←5分 → 30秒
-let BREAK = 30;      //（使ってるならそのまま30秒）
+let WORK = 2 * 60;
+let FIRE = 30;
+let BREAK = 30;
 
 let timeLeft = WORK;
 let mode = "work";
 
 let timer;
 let flashing = false;
+let round = 0; // 周回数
 
 function formatTime(sec){
   let m = Math.floor(sec / 60);
@@ -29,6 +32,7 @@ function formatTime(sec){
 
 function updateDisplay(){
   document.getElementById("time").innerText = formatTime(timeLeft);
+  document.getElementById("count").innerText = "周回：" + round;
 
   let label = "";
   if(mode === "work") label = "🔥 Work";
@@ -55,7 +59,7 @@ function flashScreen(){
     clearInterval(flash);
     body.style.backgroundColor = "white";
     flashing = false;
-  }, 10000); // ←60秒 → 10秒
+  }, 10000);
 }
 
 function nextPhase(){
@@ -68,6 +72,7 @@ function nextPhase(){
   } else {
     mode = "work";
     timeLeft = WORK;
+    round++; // ←1周カウント🔥
   }
   updateDisplay();
 }
@@ -81,9 +86,19 @@ function startTimer(){
 
     if(timeLeft <= 0){
       flashScreen();
-      nextPhase();
+      nextPhase(); // ←自動で次へ（止まらない🔥）
     }
   }, 1000);
+}
+
+// 🔄 リセット機能
+function resetTimer(){
+  clearInterval(timer);
+  timer = null;
+  mode = "work";
+  timeLeft = WORK;
+  round = 0;
+  updateDisplay();
 }
 
 updateDisplay();

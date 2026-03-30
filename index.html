@@ -22,7 +22,7 @@ let mode = "work";
 
 let timer;
 let flashing = false;
-let round = 0; // 周回数
+let round = 0;
 
 function formatTime(sec){
   let m = Math.floor(sec / 60);
@@ -42,7 +42,6 @@ function updateDisplay(){
   document.getElementById("mode").innerText = label;
 }
 
-// 🔵🟡 点滅（10秒）
 function flashScreen(){
   if(flashing) return;
   flashing = true;
@@ -72,7 +71,7 @@ function nextPhase(){
   } else {
     mode = "work";
     timeLeft = WORK;
-    round++; // ←1周カウント🔥
+    round++;
   }
   updateDisplay();
 }
@@ -86,12 +85,11 @@ function startTimer(){
 
     if(timeLeft <= 0){
       flashScreen();
-      nextPhase(); // ←自動で次へ（止まらない🔥）
+      nextPhase();
     }
   }, 1000);
 }
 
-// 🔄 リセット機能
 function resetTimer(){
   clearInterval(timer);
   timer = null;
@@ -100,6 +98,9 @@ function resetTimer(){
   round = 0;
   updateDisplay();
 }
+
+// 🔥ページ開いた瞬間に開始
+window.onload = startTimer;
 
 updateDisplay();
 </script>
